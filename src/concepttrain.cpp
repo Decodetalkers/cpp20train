@@ -1,3 +1,5 @@
+#include "concepttrain/gamera.hpp"
+
 #include <concepts>
 #include <cstddef>
 #include <cstdio>
@@ -56,4 +58,6 @@ main()
     f("abc"s); // OK, std::string satisfies Hashable
                // f(meow{}); // Error: meow does not satisfy Hashable
     getstring(meow{});
+	struct Gammera a = {.a=10};
+	getstring(a);
 }
