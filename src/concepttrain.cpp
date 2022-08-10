@@ -1,4 +1,5 @@
 #include "concepttrain/gamera.hpp"
+#include "concepttrain/metatypes.h"
 
 #include <concepts>
 #include <cstddef>
@@ -50,6 +51,50 @@ getstring(T input)
 {
     std::cout << input.stringify() << std::endl;
 }
+template<Countable T>
+void
+addAndPrint(T input)
+{
+    std::cout << input.name() << std::endl;
+    std::cout << input.count() << std::endl;
+    input.addcount();
+    std::cout << input.count() << std::endl;
+}
+struct TestStruct
+{
+    std::string m_name;
+    int m_count;
+    void addcount() { m_count += 1; }
+    inline std::string name() { return m_name; }
+    inline int count() { return m_count; }
+};
+struct TestStruct2
+{
+    std::string m_name;
+    int m_count;
+    void addcount() { m_count += 1; }
+    inline std::string name() { return m_name; }
+    inline int count() { return m_count; }
+};
+
+struct MyStructA
+{
+    int a = 100;
+    friend struct MyStructB;
+
+private:
+    int code  = 10;
+    int count = 100;
+};
+
+struct MyStructB
+{
+    template<Friendable T>
+    void iamYourFriend(T input)
+    {
+        std::cout << input.code << input.count << std::endl;
+    }
+};
 int
 main()
 {
@@ -58,6 +103,11 @@ main()
     f("abc"s); // OK, std::string satisfies Hashable
                // f(meow{}); // Error: meow does not satisfy Hashable
     getstring(meow{});
-	struct Gammera a = {.a=10};
-	getstring(a);
+    struct Gammera a = {.a = 10};
+    getstring(a);
+    addAndPrint(TestStruct{.m_name = "test"});
+    addAndPrint(TestStruct2{.m_name = "test2"});
+    struct MyStructA frienda = MyStructA{};
+    struct MyStructB friendb = {};
+    friendb.iamYourFriend(frienda);
 }
