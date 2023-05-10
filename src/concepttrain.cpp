@@ -45,12 +45,14 @@ concept Stringable = requires(T a)
         a.stringify()
         } -> std::convertible_to<std::string>;
 };
+
 template<Stringable T>
 void
 getstring(T input)
 {
     std::cout << input.stringify() << std::endl;
 }
+
 template<Countable T>
 void
 addAndPrint(T input)
@@ -60,6 +62,7 @@ addAndPrint(T input)
     input.addcount();
     std::cout << input.count() << std::endl;
 }
+
 struct TestStruct
 {
     std::string m_name;
@@ -68,6 +71,7 @@ struct TestStruct
     inline std::string name() { return m_name; }
     inline int count() { return m_count; }
 };
+
 struct TestStruct2
 {
     std::string m_name;
@@ -89,12 +93,21 @@ private:
 
 struct MyStructB
 {
+    int code = 0;
     template<Friendable T>
     void iamYourFriend(T input)
     {
         std::cout << input.code << input.count << std::endl;
     }
 };
+
+template<typename T>
+[[nodiscard]] T
+unwrap(T *input)
+{
+    return *input;
+}
+
 int
 main()
 {
@@ -110,4 +123,17 @@ main()
     struct MyStructA frienda = MyStructA{};
     struct MyStructB friendb = {};
     friendb.iamYourFriend(frienda);
+    struct MyStructB *friende = new MyStructB{};
+    auto e                    = unwrap(friende);
+    e.code                    = 100;
+    std::cout << friende->code << std::endl;
+    friende->code = 30;
+    std::cout << friende->code << std::endl;
+    (*friende).code = 90;
+    std::cout << friende->code << std::endl;
+    auto f = (*friende);
+    f.code = 9000;
+    std::cout << friende->code << std::endl;
+    (*friende).code = 1000;
+    std::cout << friende->code << std::endl;
 }
