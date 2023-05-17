@@ -1,3 +1,4 @@
+#include <format>
 #include <iomanip>
 #include <iostream>
 #include <string>
@@ -44,5 +45,7 @@ main(void)
     std::cout << e << std::endl;
     std::cout << m << std::endl;
     std::cout << m << std::endl;
+    auto format_out = std::format("a {}", 1);
+    std::cout << format_out << std::endl;
     return 0;
 }
