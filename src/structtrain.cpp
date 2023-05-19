@@ -6,7 +6,7 @@ struct MyStruct
 };
 
 int
-main(int argc, char *argv[])
+main()
 {
     struct MyStruct e = {
       .a = 10,

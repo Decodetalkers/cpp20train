@@ -40,3 +40,8 @@ futuretrain = executable('futuretrain',
 )
 
 test('testfuturetrain', futuretrain)
+
+templatetrain = executable('templatetrain',
+  './src/templatetrain.cpp'
+)
+
