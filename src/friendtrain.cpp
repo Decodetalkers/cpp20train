@@ -45,13 +45,15 @@ B::B()
 B::~B()
 {
 }
+
 void
 B::display(A &a)
 {
     std::cout << a.b << std::endl;
 }
+
 int
-main(int argc, char *argv[])
+main()
 {
     A a;
     B b;

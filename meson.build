@@ -34,3 +34,9 @@ visittrain = executable('visittrain',
 )
 
 test('testvisittrain', visittrain)
+
+futuretrain = executable('futuretrain',
+  './src/futuretrain.cpp'
+)
+
+test('testfuturetrain', futuretrain)
