@@ -1,7 +1,7 @@
 #include <coroutine>
+#include <cstdint>
 #include <exception>
 #include <iostream>
-#include <cstdint>
 
 template<typename T>
 struct Generator
