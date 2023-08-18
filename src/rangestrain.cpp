@@ -1,5 +1,20 @@
 #include <iostream>
+#include <optional>
 #include <ranges>
+#include <vector>
+
+template<std::ranges::range R>
+auto
+to_vector(R &&r)
+{
+    auto r_common = r | std::views::common;
+    return std::vector(r_common.begin(), r_common.end());
+}
+
+struct ABC {
+    std::optional<int> a;
+    std::optional<int> b;
+};
 
 int
 main()
@@ -15,5 +30,12 @@ main()
 
     for (int i : std::views::transform(std::views::filter(ints, even), square))
         std::cout << i << ' ';
+
+    std::vector<int> e = to_vector(ints | std::views::filter(even));
+    for (int a : e) {
+        std::cout << a << std::endl;
+    }
+    auto eee = ABC{};
+    eee.a.value_or(3);
     return 0;
 }
