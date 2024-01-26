@@ -15,10 +15,8 @@ mysort(RandomAccessIterator begin, RandomAccessIterator end, Func func)
         bool has_swap = false;
         while (beginNext != end) {
             if (func(*beginBack, *beginNext)) {
-                has_swap   = true;
-                type tmp   = *beginBack;
-                *beginBack = *beginNext;
-                *beginNext = tmp;
+                has_swap = true;
+                std::swap(*beginBack, *beginNext);
             }
             ++beginBack;
             ++beginNext;
