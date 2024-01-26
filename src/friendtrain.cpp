@@ -2,7 +2,7 @@
 class A
 {
 public:
-    A();
+    A(int data);
     A(A &&)                 = default;
     A(const A &)            = default;
     A &operator=(A &&)      = default;
@@ -16,8 +16,8 @@ private:
 private:
 };
 
-A::A()
-  : b(10)
+A::A(int data)
+  : b(data)
 {
 }
 
@@ -55,7 +55,7 @@ B::display(A &a)
 int
 main()
 {
-    A a;
+    A a = A{10};
     B b;
     b.display(a);
     return 0;

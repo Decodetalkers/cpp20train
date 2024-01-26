@@ -1,7 +1,7 @@
 project('learning', 'cpp',
   version : '0.1',
   default_options : ['warning_level=3',
-                     'cpp_std=c++20'])
+                     'cpp_std=c++23'])
 
 conncepttrain = executable('conncepttrain',
   'src/concepttrain.cpp',
@@ -47,4 +47,8 @@ templatetrain = executable('templatetrain',
 
 rangestrain = executable('rangestrain',
   './src/rangestrain.cpp'
+)
+
+selftrain = executable('selftrain',
+  './src/selftrain.cpp'
 )
