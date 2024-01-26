@@ -6,8 +6,8 @@ template<class RandomAccessIterator, typename Func>
 void
 my_sort(RandomAccessIterator begin, RandomAccessIterator end, Func func)
 {
-    using type = std::remove_cvref_t<decltype(*begin)>;
-    static_assert(std::is_invocable_r_v<bool, Func, type, type>);
+    using val_type = std::remove_cvref_t<decltype(*begin)>;
+    static_assert(std::is_invocable_r_v<bool, Func, val_type, val_type>);
     while (true) {
         RandomAccessIterator beginBack = begin;
         RandomAccessIterator beginNext = begin + 1;
@@ -29,8 +29,8 @@ template<class RandomAccessIterator, typename Func>
 void
 my_for_each(RandomAccessIterator begin, RandomAccessIterator end, Func func)
 {
-    using type = std::remove_cv_t<decltype(*begin)>;
-    static_assert(std::is_invocable_r_v<void, Func, type>);
+    using ref_type = std::remove_cv_t<decltype(*begin)>;
+    static_assert(std::is_invocable_r_v<void, Func, ref_type>);
     RandomAccessIterator beginBack = begin;
     while (beginBack != end) {
         func(*beginBack);
