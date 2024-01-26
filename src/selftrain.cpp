@@ -10,8 +10,7 @@ mysort(RandomAccessIterator begin, RandomAccessIterator end, Func func)
     static_assert(std::is_invocable_r_v<bool, Func, type, type>);
     while (true) {
         RandomAccessIterator beginBack = begin;
-        RandomAccessIterator beginNext = begin;
-        ++beginNext;
+        RandomAccessIterator beginNext = begin + 1;
         bool has_swap = false;
         while (beginNext != end) {
             if (func(*beginBack, *beginNext)) {
