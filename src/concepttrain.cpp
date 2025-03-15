@@ -14,7 +14,7 @@ concept Hashable = requires(T a)
 {
     {
         std::hash<T>{}(a)
-        } -> std::convertible_to<std::size_t>;
+    } -> std::convertible_to<std::size_t>;
 };
 
 struct meow
@@ -43,7 +43,7 @@ concept Stringable = requires(T a)
 {
     {
         a.stringify()
-        } -> std::convertible_to<std::string>;
+    } -> std::convertible_to<std::string>;
 };
 
 template<Stringable T>
@@ -118,8 +118,8 @@ main()
     getstring(meow{});
     struct Gammera a = {.a = 10};
     getstring(a);
-    addAndPrint(TestStruct{.m_name = "test"});
-    addAndPrint(TestStruct2{.m_name = "test2"});
+    addAndPrint(TestStruct{.m_name = "test", .m_count = 0});
+    addAndPrint(TestStruct2{.m_name = "test2", .m_count = 0});
     struct MyStructA frienda = MyStructA{};
     struct MyStructB friendb = {};
     friendb.iamYourFriend(frienda);
